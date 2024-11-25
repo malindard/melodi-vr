@@ -20,7 +20,7 @@ const SEARCH_AGAIN_MESSAGES = [
 ];
 
 // Fungsi untuk membuat speech synthesis dalam bahasa Indonesia
-const speakInIndonesian = (text: string, rate: number = 1.2) => {
+const speakInIndonesian = (text: string, rate: number = 1.2, onEnd?: () => void) => {
   if (typeof window !== 'undefined') {
     const speech = new SpeechSynthesisUtterance(text);
     
@@ -82,7 +82,7 @@ export default function CariRuangan() {
   const voices = useVoices();
 
   const [stage, setStage] = useState<'listening' | 'result'>('listening');
-  const [searchResult, setSearchResult] = useState<string | null>(null);
+  const [searchResult, setSearchResult] = useState<{ name: string; floorName: string; description: string } | null>(null);
   const [spokenRoom, setSpokenRoom] = useState<string>('');
 
   // Efek untuk memulai voice recognition dan bertanya saat komponen dimuat
@@ -93,7 +93,9 @@ export default function CariRuangan() {
       const randomIntro = INTRO_MESSAGES[Math.floor(Math.random() * INTRO_MESSAGES.length)];
       
       // Menggunakan fungsi custom untuk berbicara dalam bahasa Indonesia
-      speakInIndonesian(randomIntro);
+      speakInIndonesian(randomIntro, 1.2, () => {
+        setStage('listening'); // Pindah ke stage listening setelah berbicara selesai
+      });
     }
   }, [voices]); 
 
@@ -102,11 +104,19 @@ export default function CariRuangan() {
     const result = searchRoom(lowerText);
     
     setSpokenRoom(lowerText);
-    setSearchResult(result);
+    setSearchResult(result); // result sekarang adalah objek atau null
     setStage('result');
-
+  
     // Konfirmasi pencarian dengan bahasa Indonesia
-    speakInIndonesian(`Ruangan yang Anda cari ${result}`);
+    if (result) {
+      speakInIndonesian(`Ruangan yang Anda cari: ${result.name} berada di ${result.floorName}`, 1.2, () => {
+        setStage('listening'); // Kembali ke stage listening setelah berbicara selesai
+      });
+    } else {
+      speakInIndonesian('Maaf, ruangan yang Anda cari tidak ditemukan', 1.2, () => {
+        setStage('listening'); // Kembali ke stage listening setelah berbicara selesai
+      });
+    }
   };
 
   const handleSearchAgain = () => {
@@ -116,7 +126,9 @@ export default function CariRuangan() {
 
     // Pilih kalimat mencari ulang secara acak
     const randomSearchAgain = SEARCH_AGAIN_MESSAGES[Math.floor(Math.random() * SEARCH_AGAIN_MESSAGES.length)];
-    speakInIndonesian(randomSearchAgain);
+    speakInIndonesian(randomSearchAgain, 1.2, () => {
+      setStage('listening'); // Kembali ke stage listening setelah berbicara selesai
+    });
   };
 
   const handleNavigateToRoom = () => {
@@ -163,7 +175,11 @@ export default function CariRuangan() {
                     <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
                       Anda mencari: {spokenRoom}
                     </h3>
-                    <p className="mb-4 text-body-color">{searchResult}</p>
+                    <p className="mb-4 text-body-color">
+                      <strong>Nama Ruangan:</strong> {searchResult.name} <br />
+                      <strong>Lantai:</strong> {searchResult.floorName} <br />
+                      <strong>Letak:</strong> {searchResult.description}
+                    </p>
                     
                     <div className="flex space-x-4">
                       <button 
@@ -181,6 +197,28 @@ export default function CariRuangan() {
                     </div>
                   </div>
                 )}
+                {stage === 'result' && !searchResult && (
+                  <div>
+                    <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
+                      Anda mencari: {spokenRoom}
+                    </h3>
+                    <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
+                      Maaf, ruangan yang Anda cari tidak ditemukan.
+                    </h3>
+                    <p className="mb-4 text-body-color">
+                      Silakan coba lagi dengan nama ruangan yang berbeda.
+                    </p>
+                    <div className="flex justify-center">
+                      <button 
+                        onClick={handleSearchAgain}
+                        className="bg-primary text-white px-4 py-2 rounded-sm hover:bg-opacity-90"
+                      >
+                        Cari Ruangan Lagi
+                      </button>
+                    </div>
+                  </div>
+                )}
+
               </div>
             </div>
           </div>

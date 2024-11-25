@@ -1,6 +1,7 @@
 import roomData from '@/data/ruang.json';
 
 // Fungsi untuk mencari ruangan berdasarkan query
+// Fungsi untuk mencari ruangan berdasarkan query
 export const searchRoom = (query: string) => {
   const parseQuery = (input: string): string => {
     const words = input.toLowerCase().split(' ');
@@ -22,9 +23,13 @@ export const searchRoom = (query: string) => {
         room.id.toLowerCase().includes(searchTerm)
     );
     if (room) {
-      return `${room.name} berada di lantai ${floor.floorNumber}\n${room.description}`;
+      return {
+        name: room.name,
+        floorName: `Lantai ${floor.floorNumber}`,
+        description: room.description
+      }; // Mengembalikan objek
     }
   }
 
-  return 'Maaf, ruangan yang Anda cari tidak ditemukan';
+  return null; // Mengembalikan null jika tidak ditemukan
 };
