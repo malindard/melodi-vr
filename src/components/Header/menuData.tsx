@@ -9,18 +9,24 @@ const menuData: Menu[] = [
   },
   {
     id: 2,
+    title: "Daftar Ruangan",
+    path: "/daftar-ruangan",
+    newTab: false,
+  },
+  {
+    id: 3,
     title: "Denah",
     path: "/denah",
     newTab: false,
   },
   {
-    id: 3,
+    id: 4,
     title: "Feedback",
     path: "/feedback",
     newTab: false,
   },
   {
-    id: 4,
+    id: 5,
     title: "Tentang",
     path: "/tentang",
     newTab: false,
