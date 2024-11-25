@@ -1,0 +1,158 @@
+{
+  "floors": [
+    {
+      "floorNumber": 1,
+      "rooms": [
+        {
+          "id": "1A",
+          "name": "Ruang 1A",
+          "type": "Kelas",
+          "description": "Terletak di sisi kanan dekat lift."
+        },
+        {
+          "id": "1B",
+          "name": "Ruang 1B",
+          "type": "Kelas",
+          "description": "Terletak di tengah bangunan, sebelah kanan Ruang 1C."
+        },
+        {
+          "id": "1C",
+          "name": "Ruang 1C",
+          "type": "Kelas",
+          "description": "Terletak di tengah bangunan, sebelah kiri Ruang 1B."
+        },
+        {
+          "id": "Rapat1",
+          "name": "Ruang Rapat 1",
+          "type": "Konferensi",
+          "description": "Terletak di sisi kiri, dekat tangga."
+        },
+        {
+          "id": "Rapat2",
+          "name": "Ruang Rapat 2",
+          "type": "Konferensi",
+          "description": "Terletak di sisi kiri, di antara tangga dan Ruang Humas."
+        },
+        {
+          "id": "Humas",
+          "name": "Ruang Humas",
+          "type": "Kantor",
+          "description": "Terletak di sebelah Ruang Rapat 2."
+        },
+        {
+          "id": "Toilet1",
+          "name": "Toilet Kanan",
+          "type": "Fasilitas",
+          "description": "Terletak di sisi kanan dekat Ruang 1A."
+        },
+        {
+          "id": "Toilet2",
+          "name": "Toilet Kiri",
+          "type": "Fasilitas",
+          "description": "Terletak di sisi kiri dekat tangga."
+        }
+      ],
+      "elevatorLocation": "Kanan bangunan, dekat Ruang 1A",
+      "stairsLocation": "Kiri bangunan, dekat Toilet Kiri."
+    },
+    {
+      "floorNumber": 2,
+      "rooms": [
+        {
+          "id": "2A",
+          "name": "Ruang 2A",
+          "type": "Kelas",
+          "description": "Terletak di sisi kiri dekat tangga."
+        },
+        {
+          "id": "2B",
+          "name": "Ruang 2B",
+          "type": "Kelas",
+          "description": "Terletak di sisi kanan dekat ujung koridor."
+        },
+        {
+          "id": "2C",
+          "name": "Ruang 2C",
+          "type": "Kelas",
+          "description": "Terletak di tengah bangunan, sebelah kanan Ruang 2D."
+        },
+        {
+          "id": "2D",
+          "name": "Ruang 2D",
+          "type": "Kelas",
+          "description": "Terletak di tengah bangunan, sebelah kiri Ruang 2C."
+        }
+      ]
+    },
+    {
+      "floorNumber": 3,
+      "rooms": [
+        {
+          "id": "3A",
+          "name": "Ruang 3A",
+          "type": "Kelas",
+          "description": "Terletak di sisi kiri dekat tangga."
+        },
+        {
+          "id": "3B",
+          "name": "Ruang 3B",
+          "type": "Kelas",
+          "description": "Terletak di sisi kanan dekat ujung koridor."
+        },
+        {
+          "id": "3C",
+          "name": "Ruang 3C",
+          "type": "Kelas",
+          "description": "Terletak di tengah bangunan."
+        },
+        {
+          "id": "Office1",
+          "name": "Kantor 1",
+          "type": "Kantor",
+          "description": "Terletak di sisi kiri dekat tangga."
+        },
+        {
+          "id": "Office2",
+          "name": "Kantor 2",
+          "type": "Kantor",
+          "description": "Terletak di sisi kanan dekat ujung koridor."
+        }
+      ]
+    },
+    {
+      "floorNumber": 4,
+      "rooms": [
+        {
+          "id": "4A",
+          "name": "Ruang 4A",
+          "type": "Kelas",
+          "description": "Terletak di sisi kiri dekat tangga."
+        },
+        {
+          "id": "4B",
+          "name": "Ruang 4B",
+          "type": "Kelas",
+          "description": "Terletak di sisi kanan dekat ujung koridor."
+        },
+        {
+          "id": "Office3",
+          "name": "Kantor 3",
+          "type": "Kantor",
+          "description": "Terletak di tengah bangunan."
+        },
+        {
+          "id": "Office4",
+          "name": "Kantor 4",
+          "type": "Kantor",
+          "description": "Terletak di sisi kiri dekat tangga."
+        },
+        {
+          "id": "Office5",
+          "name": "Kantor 5",
+          "type": "Kantor",
+          "description": "Terletak di sisi kanan dekat ujung koridor."
+        }
+      ]
+    }
+  ]
+}

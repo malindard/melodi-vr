@@ -15,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="en">
+    <html suppressHydrationWarning lang="id">
       {/*
         <head /> will contain the components returned by the nearest parent
         head.js. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
@@ -26,8 +26,6 @@ export default function RootLayout({
         <Providers>
           <Header />
           {children}
-          <Footer />
-          <ScrollToTop />
         </Providers>
       </body>
     </html>
