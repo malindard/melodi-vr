@@ -132,8 +132,12 @@ export default function CariRuangan() {
   };
 
   const handleNavigateToRoom = () => {
-    speakInIndonesian("Sedang mengarahkan ke ruangan");
-    window.location.href = 'agv';
+    // Simpan informasi ruangan ke local storage
+    if (searchResult) {
+      localStorage.setItem('targetRoom', JSON.stringify(searchResult));
+      speakInIndonesian("Sedang mengarahkan ke ruangan");
+      window.location.href = 'agv';
+    }
   };
 
   return (
