@@ -133,7 +133,7 @@ export default function CariRuangan() {
 
   const handleNavigateToRoom = () => {
     speakInIndonesian("Sedang mengarahkan ke ruangan");
-    alert('Mengarahkan ke navigasi ruangan');
+    window.location.href = 'agv';
   };
 
   return (
