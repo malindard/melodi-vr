@@ -1,12 +1,16 @@
 import React from 'react';
+import SectionTitle from "@/components/Common/SectionTitle";
 
 const Tentang = () => {
   return (
     <section className="relative z-10 py-8 md:py-12 lg:py-16 min-h-screen">
-      <h1 className="text-4xl font-bold text-center text-white mb-8 mt-8">
-        Tentang Kami
-      </h1>
-      <h2 className="text-center text-white mb-8">Inovasi Digital di Gedung Digital Center</h2>
+      <SectionTitle
+        title="Tentang AGV"
+        paragraph="Inovasi Digital di Gedung Digital Center"
+        center
+        mb="20px"
+        mt="50px"
+      />
 
       <div className="flex flex-col md:flex-row justify-around items-start">
         
@@ -33,7 +37,8 @@ const Tentang = () => {
       </div>
 
       <div className="text-center mt-8">
-        <a href="/cari-ruangan" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition duration-300">
+        <a href="/cari-ruangan" 
+          className="rounded-sm bg-primary px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-primary/80">
           Mulai Mencari Ruangan
         </a>
       </div>
