@@ -2,8 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import SectionTitle from "@/components/Common/SectionTitle";
-import VoiceRecognition from '@/components/VoiceRecognition';
+import VoiceRecognition from '@/components/SpeechToText';
 import { searchRoom } from '@/components/RoomSearch';
+
 
 // Kumpulan variasi kalimat
 const INTRO_MESSAGES = [
@@ -20,7 +21,7 @@ const SEARCH_AGAIN_MESSAGES = [
 ];
 
 // Fungsi untuk membuat speech synthesis dalam bahasa Indonesia
-const speakInIndonesian = (text: string, rate: number = 1.2, onEnd?: () => void) => {
+const SpeakInIndonesian = (text: string, rate: number = 1.2, onEnd?: () => void) => {
   if (typeof window !== 'undefined') {
     const speech = new SpeechSynthesisUtterance(text);
     
@@ -93,7 +94,7 @@ export default function CariRuangan() {
       const randomIntro = INTRO_MESSAGES[Math.floor(Math.random() * INTRO_MESSAGES.length)];
       
       // Menggunakan fungsi custom untuk berbicara dalam bahasa Indonesia
-      speakInIndonesian(randomIntro, 1.2, () => {
+      SpeakInIndonesian(randomIntro, 1.2, () => {
         setStage('listening'); // Pindah ke stage listening setelah berbicara selesai
       });
     }
@@ -109,11 +110,11 @@ export default function CariRuangan() {
   
     // Konfirmasi pencarian dengan bahasa Indonesia
     if (result) {
-      speakInIndonesian(`Ruangan yang Anda cari: ${result.name} berada di ${result.floorName}`, 1.2, () => {
+      SpeakInIndonesian(`Ruangan yang Anda cari: ${result.name} berada di ${result.floorName}`, 1.2, () => {
         setStage('listening'); // Kembali ke stage listening setelah berbicara selesai
       });
     } else {
-      speakInIndonesian('Maaf, ruangan yang Anda cari tidak ditemukan', 1.2, () => {
+      SpeakInIndonesian('Maaf, ruangan yang Anda cari tidak ditemukan', 1.2, () => {
         setStage('listening'); // Kembali ke stage listening setelah berbicara selesai
       });
     }
@@ -126,7 +127,7 @@ export default function CariRuangan() {
 
     // Pilih kalimat mencari ulang secara acak
     const randomSearchAgain = SEARCH_AGAIN_MESSAGES[Math.floor(Math.random() * SEARCH_AGAIN_MESSAGES.length)];
-    speakInIndonesian(randomSearchAgain, 1.2, () => {
+    SpeakInIndonesian(randomSearchAgain, 1.2, () => {
       setStage('listening'); // Kembali ke stage listening setelah berbicara selesai
     });
   };
@@ -135,7 +136,7 @@ export default function CariRuangan() {
     // Simpan informasi ruangan ke local storage
     if (searchResult) {
       localStorage.setItem('targetRoom', JSON.stringify(searchResult));
-      speakInIndonesian("Sedang mengarahkan ke ruangan");
+      // SpeakInIndonesian("Sedang mengarahkan ke ruangan");
       window.location.href = 'agv';
     }
   };

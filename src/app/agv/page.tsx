@@ -16,17 +16,33 @@ const AnimasiPengantaran = () => {
     // Ambil informasi ruangan dari local storage
     const storedRoom = localStorage.getItem('targetRoom');
     if (storedRoom) {
-      setTargetRoom(JSON.parse(storedRoom));
+      const roomInfo = JSON.parse(storedRoom);
+      setTargetRoom(roomInfo);
     }
 
     // Simulasi waktu pengantaran
     const timer = setTimeout(() => {
       localStorage.removeItem('targetRoom'); // Bersihkan local storage
       window.location.href = '/'; // Kembali ke halaman utama setelah 5 detik
-    }, 5000);
+    }, 8000);
 
     return () => clearTimeout(timer);
   }, []);
+
+  useEffect(() => {
+    // Ucapkan hanya jika targetRoom sudah di-set
+    if (targetRoom) {
+      speak(`Sedang mengantarkan Anda ke ${targetRoom.name} di ${targetRoom.floorName}.`);
+    }
+  }, [targetRoom]); // Hanya jalankan efek ini ketika targetRoom berubah
+
+  const speak = (text: string) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'id-ID'; // Set bahasa ke Bahasa Indonesia
+    utterance.rate = 1.2;
+    utterance.volume = 1;
+    window.speechSynthesis.speak(utterance);
+  };
 
   return (
     <section className="dark:bg-bg-color-dark bg-gray-50 relative min-h-screen flex flex-col items-center justify-center">
