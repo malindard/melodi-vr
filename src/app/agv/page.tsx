@@ -23,8 +23,8 @@ const AnimasiPengantaran = () => {
     // Simulasi waktu pengantaran
     const timer = setTimeout(() => {
       localStorage.removeItem('targetRoom'); // Bersihkan local storage
-      window.location.href = '/'; // Kembali ke halaman utama setelah 5 detik
-    }, 8000);
+      window.location.href = '/'; // Kembali ke halaman utama setelah 10 detik
+    }, 10000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -32,9 +32,14 @@ const AnimasiPengantaran = () => {
   useEffect(() => {
     // Ucapkan hanya jika targetRoom sudah di-set
     if (targetRoom) {
-      speak(`Sedang mengantarkan Anda ke ${targetRoom.name} di ${targetRoom.floorName}.`);
+      if (targetRoom.floorName === "Lantai 1") {
+        speak(`Sedang mengantarkan Anda ke ${targetRoom.name}.`);
+      } else {
+        speak(`Sedang mengantarkan Anda ke lift untuk ke ${targetRoom.floorName}.`);
+      }
     }
   }, [targetRoom]); // Hanya jalankan efek ini ketika targetRoom berubah
+   // Hanya jalankan efek ini ketika targetRoom berubah
 
   const speak = (text: string) => {
     const utterance = new SpeechSynthesisUtterance(text);
@@ -58,13 +63,23 @@ const AnimasiPengantaran = () => {
         </div>
       )}
 
-      <Image 
-        src="/images/animation/agv.gif"
-        alt="AGV Animation" 
-        width={300}
-        height={300}
-        className="rounded-lg shadow-lg"
-      />
+      {targetRoom?.name ? (
+        <Image
+          src={`/images/ruangan/${targetRoom.name}.jpeg`}
+          alt={`Gambar ruangan ${targetRoom.name}`}
+          width={500}
+          height={500}
+          className="rounded-lg shadow-lg"
+        />
+      ) : (
+        <Image 
+          src="/images/animation/44.gif"
+          alt="AGV Animation" 
+          width={300}
+          height={300}
+          className="rounded-lg shadow-lg"
+        />
+      )}
       
       <p className="mt-4 text-white-600">Mohon tunggu sebentar...</p>
 

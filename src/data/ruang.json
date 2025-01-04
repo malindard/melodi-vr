@@ -7,49 +7,43 @@
           "id": "1A",
           "name": "Ruang 1A",
           "type": "Kelas",
-          "description": "Terletak di sisi kanan dekat lift."
+          "description": "Terletak di sebelah lobi."
         },
         {
           "id": "1B",
           "name": "Ruang 1B",
           "type": "Kelas",
-          "description": "Terletak di tengah bangunan, sebelah kanan Ruang 1C."
+          "description": "Terletak di depan tangga lantai 1."
         },
         {
-          "id": "1C",
-          "name": "Ruang 1C",
-          "type": "Kelas",
-          "description": "Terletak di tengah bangunan, sebelah kiri Ruang 1B."
+          "id": "Administrasi",
+          "name": "Ruang Administrasi",
+          "type": "Kantor",
+          "description": "Terletak di sisi kanan ujung koridor, setelah melewati ruang 1B."
         },
         {
           "id": "Rapat1",
           "name": "Ruang Rapat 1",
           "type": "Konferensi",
-          "description": "Terletak di sisi kiri, dekat tangga."
-        },
-        {
-          "id": "Rapat2",
-          "name": "Ruang Rapat 2",
-          "type": "Konferensi",
-          "description": "Terletak di sisi kiri, di antara tangga dan Ruang Humas."
+          "description": "Terletak di sisi kiri setelah tangga lantai 1 dan berada di depan ruang 1B."
         },
         {
           "id": "Humas",
           "name": "Ruang Humas",
           "type": "Kantor",
-          "description": "Terletak di sebelah Ruang Rapat 2."
+          "description": "Terletak di sisi kiri ujung koridor dan depan ruang administrasi."
         },
         {
-          "id": "Toilet1",
-          "name": "Toilet Kanan",
+          "id": "ToiletW",
+          "name": "Toilet Wanita",
           "type": "Fasilitas",
-          "description": "Terletak di sisi kanan dekat Ruang 1A."
+          "description": "Terletak di belakang gedung, setelah ruang administrasi."
         },
         {
-          "id": "Toilet2",
-          "name": "Toilet Kiri",
+          "id": "ToiletP",
+          "name": "Toilet Pria",
           "type": "Fasilitas",
-          "description": "Terletak di sisi kiri dekat tangga."
+          "description": "Terletak di belakang gedung, setelah ruang administrasi."
         }
       ],
       "elevatorLocation": "Kanan bangunan, dekat Ruang 1A",
@@ -62,7 +56,7 @@
           "id": "2A",
           "name": "Ruang 2A",
           "type": "Kelas",
-          "description": "Terletak di sisi kiri dekat tangga."
+          "description": "Terletak di sisi kanan setelah melewati lift lantai 2."
         },
         {
           "id": "2B",
@@ -71,16 +65,16 @@
           "description": "Terletak di sisi kanan dekat ujung koridor."
         },
         {
-          "id": "2C",
-          "name": "Ruang 2C",
-          "type": "Kelas",
-          "description": "Terletak di tengah bangunan, sebelah kanan Ruang 2D."
+          "id": "Office1",
+          "name": "Kantor 1",
+          "type": "Kantor",
+          "description": "Terletak di sisi kiri setelah melewati tangga lantai 2 dan berada di depan ruang 2B."
         },
         {
-          "id": "2D",
-          "name": "Ruang 2D",
-          "type": "Kelas",
-          "description": "Terletak di tengah bangunan, sebelah kiri Ruang 2C."
+          "id": "Office2",
+          "name": "Kantor 2",
+          "type": "Kantor",
+          "description": "Terletak di sisi kiri ujung koridor lantai 2."
         }
       ]
     },
@@ -91,7 +85,7 @@
           "id": "3A",
           "name": "Ruang 3A",
           "type": "Kelas",
-          "description": "Terletak di sisi kiri dekat tangga."
+          "description": "Terletak di sisi kanan setelah melewati lift lantai 3."
         },
         {
           "id": "3B",
@@ -100,22 +94,16 @@
           "description": "Terletak di sisi kanan dekat ujung koridor."
         },
         {
-          "id": "3C",
-          "name": "Ruang 3C",
-          "type": "Kelas",
-          "description": "Terletak di tengah bangunan."
+          "id": "Office3",
+          "name": "Kantor 3",
+          "type": "Kantor",
+          "description": "Terletak di sisi kiri dekat ujung koridor."
         },
         {
-          "id": "Office1",
-          "name": "Kantor 1",
+          "id": "Teknis",
+          "name": "Ruang Teknis",
           "type": "Kantor",
-          "description": "Terletak di sisi kiri dekat tangga."
-        },
-        {
-          "id": "Office2",
-          "name": "Kantor 2",
-          "type": "Kantor",
-          "description": "Terletak di sisi kanan dekat ujung koridor."
+          "description": "Terletak di sisi kiri setelah melewati tangga lantai 2 dan berada di depan ruang 3B."
         }
       ]
     },
@@ -126,7 +114,7 @@
           "id": "4A",
           "name": "Ruang 4A",
           "type": "Kelas",
-          "description": "Terletak di sisi kiri dekat tangga."
+          "description": "Terletak di sisi kanan setelah melewati lift lantai 4."
         },
         {
           "id": "4B",
@@ -135,22 +123,10 @@
           "description": "Terletak di sisi kanan dekat ujung koridor."
         },
         {
-          "id": "Office3",
-          "name": "Kantor 3",
-          "type": "Kantor",
-          "description": "Terletak di tengah bangunan."
-        },
-        {
-          "id": "Office4",
-          "name": "Kantor 4",
-          "type": "Kantor",
-          "description": "Terletak di sisi kiri dekat tangga."
-        },
-        {
-          "id": "Office5",
-          "name": "Kantor 5",
-          "type": "Kantor",
-          "description": "Terletak di sisi kanan dekat ujung koridor."
+          "id": "4C",
+          "name": "Ruang 4C",
+          "type": "Kelas",
+          "description": "Terletak di sisi kanan koridor, depan ruang 4B."
         }
       ]
     }

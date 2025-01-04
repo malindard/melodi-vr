@@ -24,7 +24,7 @@ const SEARCH_AGAIN_MESSAGES = [
 const SpeakInIndonesian = (text: string, rate: number = 1.2, onEnd?: () => void) => {
   if (typeof window !== 'undefined') {
     const speech = new SpeechSynthesisUtterance(text);
-    
+
     // Cari voice bahasa Indonesia
     const voices = window.speechSynthesis.getVoices();
     const indonesianVoice = voices.find(
@@ -49,6 +49,12 @@ const SpeakInIndonesian = (text: string, rate: number = 1.2, onEnd?: () => void)
       console.error('Speech synthesis error:', event);
     };
 
+    if (onEnd) {
+      speech.onend = () => {
+        onEnd();
+      }
+    }
+
     // Mulai berbicara
     window.speechSynthesis.speak(speech);
   }
@@ -66,7 +72,7 @@ function useVoices() {
 
     // Beberapa browser membutuhkan event loadedmetadata
     window.speechSynthesis.onvoiceschanged = loadVoices;
-    
+
     // Panggil sekali untuk browser yang tidak mendukung event
     loadVoices();
 
@@ -82,7 +88,7 @@ export default function CariRuangan() {
   // Hook untuk voices
   const voices = useVoices();
 
-  const [stage, setStage] = useState<'listening' | 'result'>('listening');
+  const [stage, setStage] = useState<'listening' | 'result-room' | 'listening-confirmation' | 'result' | 'confirming'>('listening');
   const [searchResult, setSearchResult] = useState<{ name: string; floorName: string; description: string } | null>(null);
   const [spokenRoom, setSpokenRoom] = useState<string>('');
 
@@ -92,31 +98,46 @@ export default function CariRuangan() {
     if (voices.length > 0) {
       // Pilih kalimat intro secara acak
       const randomIntro = INTRO_MESSAGES[Math.floor(Math.random() * INTRO_MESSAGES.length)];
-      
+
       // Menggunakan fungsi custom untuk berbicara dalam bahasa Indonesia
       SpeakInIndonesian(randomIntro, 1.2, () => {
         setStage('listening'); // Pindah ke stage listening setelah berbicara selesai
       });
     }
-  }, [voices]); 
+  }, [voices]);
 
   const handleVoiceResult = (text: string) => {
     const lowerText = text.toLowerCase();
     const result = searchRoom(lowerText);
-    
+
     setSpokenRoom(lowerText);
     setSearchResult(result); // result sekarang adalah objek atau null
     setStage('result');
-  
+
     // Konfirmasi pencarian dengan bahasa Indonesia
     if (result) {
-      SpeakInIndonesian(`Ruangan yang Anda cari: ${result.name} berada di ${result.floorName}`, 1.2, () => {
-        setStage('listening'); // Kembali ke stage listening setelah berbicara selesai
+      SpeakInIndonesian(`Ruangan yang Anda cari: ${result.name} berada di ${result.floorName} dan ${result.description}. Apakah Anda ingin diantarkan ke ruangan tersebut?`, 1.2, () => {
+        setStage('listening-confirmation');
       });
     } else {
       SpeakInIndonesian('Maaf, ruangan yang Anda cari tidak ditemukan', 1.2, () => {
         setStage('listening'); // Kembali ke stage listening setelah berbicara selesai
       });
+    }
+  };
+
+  const handleConfirmationResponse = (response: string) => {
+    const lowerResponse = response.toLowerCase();
+    if (lowerResponse.includes("ya")) {
+      SpeakInIndonesian("Baik, saya akan mengantarkan Anda ke ruangan tersebut.", 1.2, () => {
+        handleNavigateToRoom();
+      });
+    } else if (lowerResponse.includes("tidak")) {
+      SpeakInIndonesian("Baik, kembali ke halaman utama.", 1.2, () => {
+        window.location.href = '/';
+      });
+    } else {
+      SpeakInIndonesian("Maaf, saya tidak mengerti jawaban Anda. Silakan ulangi.", 1.2);
     }
   };
 
@@ -149,7 +170,7 @@ export default function CariRuangan() {
           paragraph="Temukan ruangan dengan mudah menggunakan suara"
           center
         />
-        
+
         <div className="flex justify-center items-center mt-4">
           <div className="rounded-sm bg-white p-8 shadow-two duration-300 hover:shadow-one dark:bg-dark dark:shadow-three dark:hover:shadow-gray-dark lg:px-5 xl:px-8">
             {/* Indikator status */}
@@ -159,7 +180,7 @@ export default function CariRuangan() {
               >
               </div>
             </div>
-            
+
             {/* Jawaban Hasil Pencarian */}
             <div className="flex items-center">
               <div className="w-full">
@@ -168,14 +189,14 @@ export default function CariRuangan() {
                     <h3 className="mb-4 text-lg font-semibold text-dark dark:text-white">
                       Ruangan apa yang Anda cari?
                     </h3>
-                    <VoiceRecognition 
-                      onResult={handleVoiceResult} 
-                      isListening={true} 
+                    <VoiceRecognition
+                      onResult={handleVoiceResult}
+                      isListening={true}
                     />
                   </>
                 )}
 
-                {stage === 'result' && searchResult && (
+                {(stage === 'result' || stage === 'listening-confirmation') && searchResult && (
                   <div>
                     <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
                       Anda mencari: {spokenRoom}
@@ -185,23 +206,35 @@ export default function CariRuangan() {
                       <strong>Lantai:</strong> {searchResult.floorName} <br />
                       <strong>Letak:</strong> {searchResult.description}
                     </p>
-                    
-                    <div className="flex space-x-4">
-                      <button 
-                        onClick={handleSearchAgain}
-                        className="flex-1 bg-primary text-white px-4 py-2 rounded-sm hover:bg-opacity-90"
-                      >
-                        Cari Ruangan Lagi
-                      </button>
-                      <button 
+
+                    {/* Menambahkan kalimat konfirmasi */}
+                    <p className="mb-4 text-body-color">
+                      Apakah Anda ingin diantarkan ke ruangan tersebut?
+                    </p>
+                    <div className="flex space-x-4 justify-center items-center">
+                      {/* Tombol untuk "Ya" */}
+                      <button
                         onClick={handleNavigateToRoom}
-                        className="inline-block rounded-sm bg-black px-8 py-4 text-base font-semibold text-white duration-300 ease-in-out hover:bg-black/90 dark:bg-white/10 dark:text-white dark:hover:bg-white/5"
+                        className="w-32 bg-black px-4 py-2 rounded-sm text-base font-semibold text-white duration-300 ease-in-out hover:bg-black/90 dark:bg-white/10 dark:text-white dark:hover:bg-white/5"
                       >
-                        Antar ke Ruangan
+                        Ya
                       </button>
+                      {/* Tombol untuk "Tidak" */}
+                      <button
+                        onClick={() => window.location.href = '/'} // Mengarahkan ke halaman utama
+                        className="w-32 bg-primary text-white px-4 py-2 rounded-sm hover:bg-opacity-90"
+                      >
+                        Tidak
+                      </button>
+                      {stage === 'listening-confirmation' &&
+                        <VoiceRecognition
+                          onResult={handleConfirmationResponse}
+                          isListening={true}
+                        />}
                     </div>
                   </div>
                 )}
+
                 {stage === 'result' && !searchResult && (
                   <div>
                     <h3 className="mb-2 text-lg font-semibold text-dark dark:text-white">
@@ -214,13 +247,22 @@ export default function CariRuangan() {
                       Silakan coba lagi dengan nama ruangan yang berbeda.
                     </p>
                     <div className="flex justify-center">
-                      <button 
+                      <button
                         onClick={handleSearchAgain}
                         className="bg-primary text-white px-4 py-2 rounded-sm hover:bg-opacity-90"
                       >
                         Cari Ruangan Lagi
                       </button>
                     </div>
+                  </div>
+                )}
+
+                {stage === 'confirming' && (
+                  <div>
+                    <VoiceRecognition
+                      onResult={handleConfirmationResponse}
+                      isListening={true}
+                    />
                   </div>
                 )}
 

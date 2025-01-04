@@ -1,7 +1,6 @@
 import roomData from '@/data/ruang.json';
 
 // Fungsi untuk mencari ruangan berdasarkan query
-// Fungsi untuk mencari ruangan berdasarkan query
 export const searchRoom = (query: string) => {
   const parseQuery = (input: string): string => {
     const words = input.toLowerCase().split(' ');

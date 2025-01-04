@@ -6,6 +6,7 @@ import ScrollToTop from "@/components/ScrollToTop";
 import { Inter } from "next/font/google";
 import "node_modules/react-modal-video/css/modal-video.css";
 import "../styles/index.css";
+import { SpeechProvider } from "@/contexts/SpeechContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,8 +25,10 @@ export default function RootLayout({
 
       <body className={`bg-[#FCFCFC] dark:bg-black ${inter.className}`}>
         <Providers>
-          <Header />
-          {children}
+          <SpeechProvider>
+            <Header />
+            {children}
+          </SpeechProvider>
         </Providers>
       </body>
     </html>
@@ -33,3 +36,4 @@ export default function RootLayout({
 }
 
 import { Providers } from "./providers";
+

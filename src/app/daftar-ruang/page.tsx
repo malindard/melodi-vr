@@ -26,7 +26,7 @@ export default function DaftarRuang() {
       <div className="container">
         <SectionTitle
           title="Daftar Ruangan"
-          paragraph="Pilih lantai untuk melihat daftar ruangan yang ada di Digital Center."
+          paragraph="Pilih lantai untuk melihat daftar ruangan yang ada di Gedung Digital Center."
           center
           mb="20px"
           mt="20px"
