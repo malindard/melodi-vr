@@ -16,7 +16,7 @@ const Tentang = () => {
         
         <div className="bg-white rounded-lg shadow-three hover:shadow-one dark:bg-gray-dark dark:shadow-two dark:hover:shadow-gray-dark p-6 m-4 flex-1">
           <h2 className="text-2xl font-semibold mb-4">Website Pencarian Ruangan Gedung Digital Center</h2>
-          <p>Gedung IT Center adalah portal interaktif berbasis teknologi yang dirancang untuk memudahkan pengguna dalam menjelajahi fasilitas gedung universitas. Website ini menghadirkan pengalaman inovatif melalui:</p>
+          <p>Gedung Digital Center adalah portal interaktif berbasis teknologi yang dirancang untuk memudahkan pengguna dalam menjelajahi fasilitas gedung universitas. Website ini menghadirkan pengalaman inovatif melalui:</p>
           <ul className="list-disc pl-5 mt-2">
             <li>Pencarian Ruangan menggunakan teknologi pengenalan suara.</li>
             <li>Navigasi Denah Gedung yang mudah dipahami.</li>
@@ -26,7 +26,7 @@ const Tentang = () => {
 
         <div className="bg-white rounded-lg shadow-three hover:shadow-one dark:bg-gray-dark dark:shadow-two dark:hover:shadow-gray-dark p-6 m-4 flex-1">
           <h2 className="text-2xl font-semibold mb-4">Automated Guided Vehicle (AGV)</h2>
-          <p>Robot AGV adalah bagian dari transformasi digital Gedung IT Center. Robot ini dirancang untuk memberikan pengalaman modern kepada pengguna gedung melalui:</p>
+          <p>Robot AGV adalah bagian dari transformasi digital Gedung Digital Center. Robot ini dirancang untuk memberikan pengalaman modern kepada pengguna gedung melalui:</p>
           <ul className="list-disc pl-5 mt-2">
             <li>Interaksi Suara, memahami dan menjawab pertanyaan secara langsung.</li>
             <li>Navigasi Otomatis, membantu pengguna menuju ruangan tujuan.</li>
